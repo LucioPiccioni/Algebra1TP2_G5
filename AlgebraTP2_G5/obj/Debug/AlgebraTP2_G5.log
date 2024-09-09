@@ -1,6 +1,7 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(516,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   Main.cpp
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(7,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 raylib.lib(rcore.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rcore.obj)' or at ''; linking object as if no debug info
 raylib.lib(rglfw.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rglfw.obj)' or at ''; linking object as if no debug info
