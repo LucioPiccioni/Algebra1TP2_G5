@@ -13,7 +13,6 @@ void main()
 
     while (!WindowShouldClose())
     {
-
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
@@ -21,7 +20,6 @@ void main()
         DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
 
         EndDrawing();
-
     }
     CloseWindow();        
 

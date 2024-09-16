@@ -20,6 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="Vectors.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="Vectors.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
