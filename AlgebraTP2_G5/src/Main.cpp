@@ -1,15 +1,20 @@
 #include <iostream>
 #include "raylib.h"
+#include "raymath.h"
 
 using namespace std;
 
 void SetCamera3D(Camera3D& camera);
-void drawCamera(Camera3D camera);
+void drawCameraMenu(Camera3D camera);
 void drawNValueMenu(int& userInput);
 
 void GenerateVectorA(Vector3& vectorA, float& magnitudeA);
-void GenerateVectorB(Vector3 vectorA, Vector3& vectorB, float& magnitudeB);
+void GenerateVectorB(Vector3 vectorA, Vector3& vectorB, float magnitudeA, float& magnitudeB);
 void GenerateVectorC(Vector3 vectorA, Vector3 vectorB, Vector3& vectorC);
+void SetVecMagnitude(Vector3& vector, float magnitude);
+void NormaliceVector(Vector3& vector);
+void GetMagnitude(Vector3 vector, float& newMagnitude);
+void DrawPiramid(Vector3 startpos, Vector3 vectorA, Vector3 vectorB, Vector3 vectorC, float magnitudeC, float userInput, float& perimeter, float& area, float& volume);
 
 void main()
 {
@@ -42,10 +47,12 @@ void main()
     
 
     InitWindow(screenWidth, screenHeight, "Algebra_TP02_Grupo5");
+
+    SetCamera3D(camera);
     DisableCursor();
 
     GenerateVectorA(vectorA,magnitudeA);
-    GenerateVectorB(vectorA, vectorB, magnitudeB);
+    GenerateVectorB(vectorA, vectorB, magnitudeA, magnitudeB);
     GenerateVectorC(vectorA, vectorB, vectorC);
 
 
@@ -53,14 +60,14 @@ void main()
     {
 
         UpdateCamera(&camera, CAMERA_FREE);
-       
-        if (IsKeyPressed('Z')) camera.target ={ 0.0f, 0.0f, 0.0f };
 
         BeginDrawing();
+        BeginMode3D(camera);
 
         ClearBackground(WHITE);
-        drawCamera(camera);
 
+        drawCameraMenu(camera);
+        DrawPiramid(startPos, vectorA, vectorB, vectorC, magnitudeC, userInput, perimeter, area, volume);
 
         if (isNValueSet)
         {
@@ -69,6 +76,10 @@ void main()
 
             if (userInput > 1 || userInput < 9)
             {
+                SetVecMagnitude(vectorC, (magnitudeA / userInput));
+                GetMagnitude(vectorC, magnitudeC);
+
+                userInput = (float)userInput;
 
                 isNValueSet = true;
             }
@@ -76,10 +87,12 @@ void main()
         }
         else
         {
-
+            if (IsKeyPressed('Z')) camera.target = { 0.0f, 0.0f, 0.0f };
         }
 
 
+        EndMode3D();
+        DrawFPS(10, 10);
         EndDrawing();
     }
     CloseWindow();        
@@ -95,22 +108,15 @@ void SetCamera3D(Camera3D& camera)
     camera.fovy = 45.0f;                                // Camera field-of-view Y
     camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
 }
-void drawCamera(Camera3D camera)
+void drawCameraMenu(Camera3D camera)
 {
-    BeginMode3D(camera);
-
-    //DrawGrid(10, 1.0f);
-
-    EndMode3D();
-
-    DrawFPS(10, 10);
+    DrawGrid(10, 1.0f);
 
     DrawText("Free camera default controls:", 10, 35, 10, BLACK);
     DrawText("- Mouse Wheel to Zoom in-out", 20, 55, 10, DARKGRAY);
     DrawText("- Mouse Wheel Pressed to Pan", 20, 75, 10, DARKGRAY);
     DrawText("- Z to zoom to (0, 0, 0)", 20, 95, 10, DARKGRAY);
 }
-
 void drawNValueMenu(int& userInput)
 {
     DrawText("---------MENU---------", 640, 35, 10, BLACK);
@@ -125,43 +131,21 @@ void GenerateVectorA(Vector3& vectorA, float& magnitudeA)
     float maxRandValue = 10.0f;
 
     //generar valores aletorios
-    vectorA.x = GetRandomValue(minRandValue, maxRandValue);
-    vectorA.y = GetRandomValue(minRandValue, maxRandValue);
-    vectorA.z = GetRandomValue(minRandValue, maxRandValue);
+    vectorA.x = (float)GetRandomValue(minRandValue, maxRandValue);
+    vectorA.y = (float)GetRandomValue(minRandValue, maxRandValue);
+    vectorA.z = (float)GetRandomValue(minRandValue, maxRandValue);
    
-    //magnitudeA = GetRandomValue(minRandValue, maxRandValue);
-    float magnitude = sqrt(vectorA.x * vectorA.x + vectorA.y * vectorA.y + vectorA.z * vectorA.z);
-    magnitudeA = magnitude;
-
-    //normalizar el vector
-    vectorA.x /= magnitudeA;
-    vectorA.y /= magnitudeA;
-    vectorA.z /= magnitudeA;
-
-    // Escalamos el vector a la magnitud
-    vectorA.x *= magnitudeA;
-    vectorA.y *= magnitudeA;
-    vectorA.z *= magnitudeA;
+    GetMagnitude(vectorA, magnitudeA);
 }
-void GenerateVectorB(Vector3 vectorA, Vector3& vectorB, float& magnitudeB)
+void GenerateVectorB(Vector3 vectorA, Vector3& vectorB, float magnitudeA, float& magnitudeB )
 {
     //toma como referencia datos de A y se cambia el signo de uno para lograr que rote
     vectorB.x = vectorA.z;
+    vectorB.y = 0.0f;
     vectorB.z = -1 * vectorA.x;
 
-    //magnitudeA = GetRandomValue(minRandValue, maxRandValue);
-    float magnitude = sqrt(vectorB.x * vectorB.x + vectorB.y * vectorB.y + vectorB.z * vectorB.z);
-    magnitudeB = magnitude;
-
-    //normalizar el vector
-    vectorB.x /= magnitudeB;
-    vectorB.y /= magnitudeB;
-    vectorB.z /= magnitudeB;
-
-    // Escalamos el vector a la magnitud
-    vectorB.x *= magnitudeB;
-    vectorB.y *= magnitudeB;
-    vectorB.z *= magnitudeB;
+    SetVecMagnitude(vectorB, magnitudeA);
+    GetMagnitude(vectorB, magnitudeB);
 }
 void GenerateVectorC(Vector3 vectorA, Vector3 vectorB, Vector3& vectorC)
 {
@@ -169,4 +153,62 @@ void GenerateVectorC(Vector3 vectorA, Vector3 vectorB, Vector3& vectorC)
     vectorC.x = ((vectorA.y * vectorB.z) - (vectorA.z * vectorB.y));
     vectorC.y = ((vectorA.x * vectorB.z) - (vectorA.z * vectorB.x));
     vectorC.z = ((vectorA.x * vectorB.y) - (vectorA.y * vectorB.x));
+}
+
+void SetVecMagnitude(Vector3& vector, float magnitude)
+{
+    NormaliceVector(vector);
+
+    // Escalamos el vector a la magnitud
+    vector.x *= magnitude;
+    vector.y *= magnitude;
+    vector.z *= magnitude;
+}
+void NormaliceVector(Vector3& vector)
+{
+    float auxMagnitude;
+
+    GetMagnitude(vector, auxMagnitude);
+
+    vector.x /= auxMagnitude;
+    vector.y /= auxMagnitude;
+    vector.z /= auxMagnitude;
+}
+void GetMagnitude(Vector3 vector, float& newMagnitude)
+{
+    newMagnitude = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z);
+}
+
+void DrawPiramid(Vector3 startPos,Vector3 vectorA, Vector3 vectorB, Vector3 vectorC, float magnitudeC, float userInput, float& perimeter, float& area, float& volume)
+{
+    Vector3 transformVecX; //desplazamiento en x por piso
+    transformVecX.x = vectorA.x / userInput;
+    transformVecX.y = vectorA.y / userInput;
+    transformVecX.z = vectorA.z / userInput;
+
+    Vector3 transformVecY; //desplazamiento en y por piso
+    transformVecY.x = vectorB.x / userInput;
+    transformVecY.y = vectorB.y / userInput;
+    transformVecY.z = vectorB.z / userInput;
+
+    //reduccion diagonal desde el vertice por cada piso
+    Vector3 reductStartPos = Vector3Add(transformVecX, transformVecY);
+    Vector3 reductA = Vector3Add(Vector3Scale(transformVecX, -1.0), transformVecY);
+    Vector3 reductB = Vector3Subtract(transformVecX, transformVecY);
+    Vector3 reductC = Vector3Subtract(Vector3Scale(transformVecX, -1.0), transformVecY);
+
+    //almacenamiento de los valores originales
+    Vector3 auxStartPos = startPos;
+    Vector3 auxVecA = vectorA;
+    Vector3 auxVecB = vectorB;
+    Vector3 auxVecC = vectorC;
+
+    DrawLine3D(startPos, vectorA, RED);
+    DrawLine3D(startPos, vectorB, GREEN);
+    DrawLine3D(startPos, vectorC, BLUE);
+
+    float floorAmount = userInput / 2;
+    float actualMagnitude;
+
+    actualMagnitude = Vector3Distance(auxStartPos, Vector3Scale(reductStartPos, 0)), Vector3Add(auxVecA, Vector3Scale(reductA, 0));
 }
