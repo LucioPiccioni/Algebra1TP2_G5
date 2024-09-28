@@ -2,13 +2,39 @@
 C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
   Main.cpp
 C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(20,1): warning C4326: return type of 'main' should be 'int' instead of 'void'
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(21,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(70,70): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(82,36): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(135,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(135,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(136,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(136,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(137,53): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(137,39): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(21,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(64,64): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(81,24): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(134,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(134,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(135,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(135,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(136,50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(136,36): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(217,68): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(217,139): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(218,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(218,117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(219,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(219,117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(220,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(220,117): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(222,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(222,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(223,79): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(223,126): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(225,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(225,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(226,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(226,103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(227,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(227,103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(234,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(234,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(235,67): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(235,114): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(236,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(236,103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(237,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\src\Main.cpp(237,103): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   AlgebraTP2_G5.vcxproj -> C:\Users\Fran\OneDrive\Escritorio\Fran\ImageCampus\2024\Algebra\AlgebraTP2_G5\AlgebraTP2_G5\bin\Debug\AlgebraTP2_G5.exe
