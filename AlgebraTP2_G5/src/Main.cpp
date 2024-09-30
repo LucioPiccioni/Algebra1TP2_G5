@@ -5,7 +5,7 @@
 using namespace std;
 
 void SetCamera(Camera& camera, Vector3 startPos);
-void ShowMenu(float magnitudeA);
+void ShowMenu(float magnitudeA,float perimeter, float area, float volume);
 void CameraHandler(Camera3D& camera, int& cameraMode);
 void drawNValueMenu(int& userInput);
 
@@ -27,9 +27,7 @@ void main()
 	int userInput = 0;
 	bool isNValueSet = false;
 
-	float perimeter = 0.0f;
-	float area = 0.0f;
-	float volume = 0.0f;
+	
 
 	Vector3 startPos = { 0.0f, 0.0f, 0.0f };
 	Vector3 vectorA;
@@ -56,6 +54,10 @@ void main()
 	{
 		int auxInput = 0;
 
+		float perimeter{};
+		float area{};
+		float volume{};
+
 		UpdateCamera(&camera, CAMERA_FREE);
 
 		CameraHandler(camera, cameraMode);
@@ -63,7 +65,6 @@ void main()
 		BeginDrawing();
 		ClearBackground(WHITE);
 
-		ShowMenu(magnitudeA);
 
 		BeginMode3D(camera);
 
@@ -71,6 +72,7 @@ void main()
 		
 		EndMode3D();
 
+		ShowMenu(magnitudeA, perimeter, area, volume);
 		cout << "user input" << userInput << endl;
 
 		if (!isNValueSet)
@@ -87,8 +89,8 @@ void main()
 
 				isNValueSet = true;
 			}
-
 		}
+
 		else
 		{
 			if (IsKeyPressed('Z')) camera.target = { 0.0f, 0.0f, 0.0f };
@@ -117,7 +119,7 @@ void SetCamera(Camera& camera, Vector3 startPos)
 
 	camera.target = startPos;
 }
-void ShowMenu(float magnitudeA)
+void ShowMenu(float magnitudeA, float perimeter, float area, float volume)
 {
 	Vector2 magnitudeTextPos = { 10, 30 };
 	Vector2 vectorATextPos = { 10, 50 };
@@ -125,10 +127,15 @@ void ShowMenu(float magnitudeA)
 	Vector2 vectorCTextPos = { 10, 90 };
 
 
-	DrawText(TextFormat("Vector A and B magnitude: %.2f", magnitudeA), magnitudeTextPos.x, magnitudeTextPos.y, 15, BLACK);
-	DrawText("Vector A: RED", vectorATextPos.x, vectorATextPos.y, 15, BLACK);
-	DrawText("Vector B: GREEN", vectorBTextPos.x, vectorBTextPos.y, 15, BLACK);
-	DrawText("Vector C: BLUE", vectorCTextPos.x, vectorCTextPos.y, 15, BLACK);
+	DrawText(TextFormat("Vector A and B magnitude: %.2f", magnitudeA), magnitudeTextPos.x, magnitudeTextPos.y, 10, BLACK);
+	DrawText("Vector A: RED", vectorATextPos.x, vectorATextPos.y, 10, DARKGRAY);
+	DrawText("Vector B: GREEN", vectorBTextPos.x, vectorBTextPos.y, 10, DARKGRAY);
+	DrawText("Vector C: BLUE", vectorCTextPos.x, vectorCTextPos.y, 10, DARKGRAY);
+
+	DrawText("---------VALUES---------", 10, 110, 10, BLACK);
+	DrawText(TextFormat("Perimeter: %.2f", perimeter), 10, 130, 10, DARKGRAY);
+	DrawText(TextFormat("Area: %.2f", area), 10, 150, 10, DARKGRAY);
+	DrawText(TextFormat("Volume: %.2f", volume), 10, 170, 10, DARKGRAY);
 }
 void CameraHandler(Camera3D& camera, int& cameraMode)
 {
@@ -275,6 +282,8 @@ void DrawPiramid(Vector3 startPos, Vector3 vectorA, Vector3 vectorB, Vector3 vec
 
 	actualMagnitude = Vector3Distance(auxStartPos, Vector3Scale(reductStartPos, 0)), Vector3Add(auxVecA, Vector3Scale(reductA, 0));
 
+
+
 	for (int i = 0; i < floorAmount; i++)
 	{
 		DrawLine3D(Vector3Add(auxStartPos, (Vector3Scale(reductStartPos, i))), Vector3Add(Vector3Add(auxStartPos, (Vector3Scale(reductStartPos, i))), vectorC), BLUE);
@@ -284,6 +293,14 @@ void DrawPiramid(Vector3 startPos, Vector3 vectorA, Vector3 vectorB, Vector3 vec
 
 		DrawLine3D(Vector3Add(auxStartPos, Vector3Scale(reductStartPos, i)), Vector3Add(auxVecA, Vector3Scale(reductA, i)), BLACK);
 		actualMagnitude = Vector3Distance(auxStartPos, Vector3Scale(reductStartPos, i)), Vector3Add(auxVecA, Vector3Scale(reductA, i));
+
+		perimeter += ((actualMagnitude * 8.0f) + (magnitudeC * 4.0f));
+
+		Vector3 crossProduct = Vector3CrossProduct(vectorA, vectorB);
+		float baseArea = Vector3Length(crossProduct); // Área del paralelogramo como base
+		//area += baseArea;
+		area += (actualMagnitude * 4.0f) * magnitudeC;
+		volume += ((actualMagnitude * actualMagnitude) * magnitudeC);
 
 		DrawLine3D(Vector3Add(auxStartPos, Vector3Scale(reductStartPos, i)), Vector3Add(auxVecB, Vector3Scale(reductB, i)), BLACK);
 		DrawLine3D(Vector3Add(auxVecC, Vector3Scale(reductC, i)), Vector3Add(auxVecA, Vector3Scale(reductA, i)), BLACK);
