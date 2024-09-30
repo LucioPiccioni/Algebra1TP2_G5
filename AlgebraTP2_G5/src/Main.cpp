@@ -4,8 +4,9 @@
 
 using namespace std;
 
-void SetCamera3D(Camera3D& camera);
-void drawCameraMenu(Camera3D camera);
+void SetCamera(Camera& camera, Vector3 startPos);
+void ShowMenu(float magnitudeA);
+void CameraHandler(Camera3D& camera, int& cameraMode);
 void drawNValueMenu(int& userInput);
 
 void GenerateVectorA(Vector3& vectorA, float& magnitudeA);
@@ -30,8 +31,6 @@ void main()
 	float area = 0.0f;
 	float volume = 0.0f;
 
-	Camera3D camera;
-
 	Vector3 startPos = { 0.0f, 0.0f, 0.0f };
 	Vector3 vectorA;
 	Vector3 vectorB;
@@ -42,7 +41,10 @@ void main()
 
 	InitWindow(screenWidth, screenHeight, "Algebra_TP02_Grupo5");
 
-	SetCamera3D(camera);
+	Camera camera = { 0 };
+	SetCamera(camera, startPos);
+	int cameraMode = CAMERA_FIRST_PERSON;
+
 	DisableCursor();
 
 	GenerateVectorA(vectorA, magnitudeA);
@@ -56,15 +58,18 @@ void main()
 
 		UpdateCamera(&camera, CAMERA_FREE);
 
-		BeginDrawing();
-		BeginMode3D(camera);
+		CameraHandler(camera, cameraMode);
 
+		BeginDrawing();
 		ClearBackground(WHITE);
 
+		ShowMenu(magnitudeA);
+
+		BeginMode3D(camera);
+
 		DrawPiramid(startPos, vectorA, vectorB, vectorC, magnitudeC, userInput, perimeter, area, volume);
-		/*cout << "C magnitude: " << vectorC.x << endl;
-		cout << "C magnitude: " << vectorC.y << endl;
-		cout << "C magnitude: " << vectorC.z << endl;*/
+		
+		EndMode3D();
 
 		cout << "user input" << userInput << endl;
 
@@ -89,9 +94,6 @@ void main()
 			if (IsKeyPressed('Z')) camera.target = { 0.0f, 0.0f, 0.0f };
 		}
 
-		drawCameraMenu(camera);
-		EndMode3D();
-
 		DrawFPS(10, 10);
 		EndDrawing();
 	}
@@ -99,23 +101,84 @@ void main()
 
 }
 
-void SetCamera3D(Camera3D& camera)
+void SetCamera(Camera& camera, Vector3 startPos)
 {
-	camera = { 0 };
-	camera.position = { 0.0f, 10.0f, 10.0f };  // Camera position
-	camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
+	camera.position = { 0.0f, 2.0f, 4.0f };    // Camera position
+	camera.target = { 0.0f, 2.0f, 0.0f };      // Camera looking at point
 	camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
-	camera.fovy = 45.0f;                                // Camera field-of-view Y
-	camera.projection = CAMERA_PERSPECTIVE;             // Camera mode type
-}
-void drawCameraMenu(Camera3D camera)
-{
-	DrawGrid(10, 1.0f);
+	camera.fovy = 100.0f;                                // Camera field-of-view Y
+	camera.projection = CAMERA_PERSPECTIVE;             // Camera projection type
 
-	DrawText("Free camera default controls:", 10, 35, 10, BLACK);
-	DrawText("- Mouse Wheel to Zoom in-out", 20, 55, 10, DARKGRAY);
-	DrawText("- Mouse Wheel Pressed to Pan", 20, 75, 10, DARKGRAY);
-	DrawText("- Z to zoom to (0, 0, 0)", 20, 95, 10, DARKGRAY);
+	camera.position = startPos;
+
+	camera.position.x += 2.0f;
+	camera.position.y += 2.0f;
+	camera.position.z += 2.0f;
+
+	camera.target = startPos;
+}
+void ShowMenu(float magnitudeA)
+{
+	Vector2 magnitudeTextPos = { 10, 30 };
+	Vector2 vectorATextPos = { 10, 50 };
+	Vector2 vectorBTextPos = { 10, 70 };
+	Vector2 vectorCTextPos = { 10, 90 };
+
+
+	DrawText(TextFormat("Vector A and B magnitude: %.2f", magnitudeA), magnitudeTextPos.x, magnitudeTextPos.y, 15, BLACK);
+	DrawText("Vector A: RED", vectorATextPos.x, vectorATextPos.y, 15, BLACK);
+	DrawText("Vector B: GREEN", vectorBTextPos.x, vectorBTextPos.y, 15, BLACK);
+	DrawText("Vector C: BLUE", vectorCTextPos.x, vectorCTextPos.y, 15, BLACK);
+}
+void CameraHandler(Camera3D& camera, int& cameraMode)
+{
+	if (IsKeyPressed(KEY_F))
+	{
+		cameraMode = CAMERA_FREE;
+		camera.up = { 0.0f, 1.0f, 0.0f };
+	}
+
+	if (IsKeyPressed(KEY_G))
+	{
+		cameraMode = CAMERA_FIRST_PERSON;
+		camera.up = { 0.0f, 1.0f, 0.0f };
+	}
+
+	if (IsKeyPressed(KEY_H))
+	{
+		cameraMode = CAMERA_THIRD_PERSON;
+		camera.up = { 0.0f, 1.0f, 0.0f };
+	}
+
+	if (IsKeyPressed(KEY_J))
+	{
+		cameraMode = CAMERA_ORBITAL;
+		camera.up = { 0.0f, 1.0f, 0.0f };
+	}
+
+	if (IsKeyPressed(KEY_P))
+	{
+		if (camera.projection == CAMERA_PERSPECTIVE)
+		{
+			cameraMode = CAMERA_THIRD_PERSON;
+			camera.position = { 0.0f, 2.0f, -100.0f };
+			camera.target = { 0.0f, 2.0f, 0.0f };
+			camera.up = { 0.0f, 1.0f, 0.0f };
+			camera.projection = CAMERA_ORTHOGRAPHIC;
+			camera.fovy = 20.0f;
+		}
+		else if (camera.projection == CAMERA_ORTHOGRAPHIC)
+		{
+			cameraMode = CAMERA_THIRD_PERSON;
+			camera.position = { 0.0f, 2.0f, 10.0f };
+			camera.target = { 0.0f, 2.0f, 0.0f };
+			camera.up = { 0.0f, 1.0f, 0.0f };
+			camera.projection = CAMERA_PERSPECTIVE;
+			camera.fovy = 60.0f;
+		}
+	}
+
+	UpdateCamera(&camera, cameraMode);
 }
 void drawNValueMenu(int& userInput)
 {
